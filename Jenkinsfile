@@ -41,7 +41,7 @@ pipeline {
                               echo "No existing container found."
                          }
                          echo "Deploying container..."
-                         sh "docker run -d -p 8989:8080 --name \${DOCKER_IMAGE} \${DOCKER_IMAGE}"
+                         sh "docker run -d -p 8080:8989 --name \${DOCKER_IMAGE} \${DOCKER_IMAGE}"
                          sh "docker ps | grep \${DOCKER_IMAGE}"
                     }
                }
