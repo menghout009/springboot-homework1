@@ -1,8 +1,8 @@
 pipeline {
-        agent any
-//      agent {
-//           label 'agent-spring'
-//      }
+//         agent any
+     agent {
+          label 'agent-spring'
+     }
      environment{
           DOCKER_IMAGE = "spring-api"
      }
