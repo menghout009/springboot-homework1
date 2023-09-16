@@ -27,7 +27,7 @@ pipeline {
           }
           stage("Test"){
                steps{
-                    echo " event if it error pls continue to run it lol "
+                    echo " even if it error pls continue to run it lol "
                }
           }
           stage("Deploy") {
