@@ -1,7 +1,8 @@
 pipeline {
-     agent {
-          label 'agent-spring'
-     }
+        agent any
+//      agent {
+//           label 'agent-spring'
+//      }
      environment{
           DOCKER_IMAGE = "spring-api"
      }
@@ -26,7 +27,7 @@ pipeline {
           }
           stage("Test"){
                steps{
-                    echo " Ot Dg Test Mx Te *_*"
+                    echo " event if it error pls continue to run it lol "
                }
           }
           stage("Deploy") {
@@ -41,7 +42,7 @@ pipeline {
                               echo "No existing container found."
                          }
                          echo "Deploying container..."
-                         sh "docker run -d -p 8080:8080 --name \${DOCKER_IMAGE} \${DOCKER_IMAGE}"
+                         sh "docker run -d -p 8080:8081 --name \${DOCKER_IMAGE} \${DOCKER_IMAGE}"
                          sh "docker ps | grep \${DOCKER_IMAGE}"
                     }
                }
