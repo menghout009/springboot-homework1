@@ -1,50 +1,54 @@
-version: '3'
-
+version: '3.8'
 services:
-  jenkins:
-    image: jenkins/jenkins:lts
-    ports:
-      - "8080:8080"
-    volumes:
-      - jenkins-data:/var/jenkins_home
-    networks:
-      - net
-
-  postgresql:
-    image: postgres:alpine
+  postgres:
+    image: postgres
+    container_name: postgres_sonar
+    restart: always
     environment:
-      POSTGRES_USER: sonar
-      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
+      POSTGRES_HOST: sonar_postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: p.postgres
+      POSTGRES_ROOT_PASSWORD: root
+    ports:
+      - "5432:5432"
     volumes:
-      - postgresql-data:/var/lib/postgresql/data
-    networks:
-      - net
+      - ./postgres/data:/var/lib/postgresql/data
 
   sonarqube:
     image: sonarqube:latest
-    environment:
-      SONAR_JDBC_URL: jdbc:postgresql://postgresql:5432/sonar
-      SONAR_JDBC_USERNAME: sonar
-      SONAR_JDBC_PASSWORD: sonar
+    container_name: sonarqube
     ports:
       - "9000:9000"
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonar
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=p.sonar
     volumes:
-      - sonarqube-data:/opt/sonarqube/data
-      - sonarqube-extensions:/opt/sonarqube/extensions
-      - sonarqube-logs:/opt/sonarqube/logs
-      - sonarqube-temp:/opt/sonarqube/temp
-    depends_on:
-      - postgresql
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_temp:/opt/sonarqube/temp
     networks:
-      - net
+      - sonar
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+    networks:
+      - sonar
 
 networks:
-  net:
+  sonar:
 
 volumes:
-  jenkins-data:
-  postgresql-data:
-  sonarqube-data:
-  sonarqube-extensions:
-  sonarqube-logs:
-  sonarqube-temp:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_temp:
+  jenkins_home:
