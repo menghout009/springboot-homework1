@@ -1,3 +1,55 @@
+#version: '3'
+#
+#services:
+#  jenkins:
+#    image: jenkins/jenkins:lts
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - jenkins-data:/var/jenkins_home
+#    networks:
+#      - net
+#
+#  postgresql:
+#    image: postgres:alpine
+#    environment:
+#      POSTGRES_USER: sonar
+#      POSTGRES_PASSWORD: sonar
+#    volumes:
+#      - postgresql-data:/var/lib/postgresql/data
+#    networks:
+#      - net
+#
+#  sonarqube:
+#    image: sonarqube:latest
+#    environment:
+#      SONAR_JDBC_URL: jdbc:postgresql://postgresql:5432/sonar
+#      SONAR_JDBC_USERNAME: sonar
+#      SONAR_JDBC_PASSWORD: sonar
+#    ports:
+#      - "9000:9000"
+#    volumes:
+#      - sonarqube-data:/opt/sonarqube/data
+#      - sonarqube-extensions:/opt/sonarqube/extensions
+#      - sonarqube-logs:/opt/sonarqube/logs
+#      - sonarqube-temp:/opt/sonarqube/temp
+#    depends_on:
+#      - postgresql
+#    networks:
+#      - net
+#
+#networks:
+#  net:
+#
+#volumes:
+#  jenkins-data:
+#  postgresql-data:
+#  sonarqube-data:
+#  sonarqube-extensions:
+#  sonarqube-logs:
+#  sonarqube-temp:
+#
+
 version: '3.8'
 services:
   postgres:
@@ -29,26 +81,11 @@ services:
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_logs:/opt/sonarqube/logs
       - sonarqube_temp:/opt/sonarqube/temp
-    networks:
-      - sonar
-
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins
-    restart: always
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./jenkins_home:/var/jenkins_home
-    networks:
-      - sonar
 
 networks:
   sonar:
-
 volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_logs:
   sonarqube_temp:
-  jenkins_home:
