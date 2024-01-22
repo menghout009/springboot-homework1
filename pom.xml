@@ -15,10 +15,10 @@
     <description>Spring_Homework_Rest_API</description>
     <properties>
         <java.version>17</java.version>
-<!--        <sonar.host.url>http://localhost:9000</sonar.host.url>-->
-<!--        <sonar.login>sqp_3e82a25ba523791469e1fed081b4748366e0c07e</sonar.login>-->
-<!--        <sonar.projectKey>sbhomework1</sonar.projectKey>-->
-<!--        <sonar.projectName>'sbhomework1'</sonar.projectName>-->
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.login>sqp_3e82a25ba523791469e1fed081b4748366e0c07e</sonar.login>
+        <sonar.projectKey>sbhomework1</sonar.projectKey>
+        <sonar.projectName>'sbhomework1'</sonar.projectName>
         <sonar.projectVersion>1.0</sonar.projectVersion>
     </properties>
     <dependencies>
@@ -47,11 +47,11 @@
             <artifactId>maven-artifact</artifactId>
             <version>3.9.4</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.sonarsource.scanner.maven</groupId>-->
-<!--            <artifactId>sonar-maven-plugin</artifactId>-->
-<!--            <version>3.6.0.1398</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.6.0.1398</version>
+        </dependency>
 
 
     </dependencies>
