@@ -6,10 +6,6 @@ pipeline {
         timestamps() // Add timestamps to logs
     }
 
-tools {
-        maven 'MAVEN' // Use the name you configured in Global Tool Configuration
-    }
-
     stages {
         stage('Preparation') {
             steps {
