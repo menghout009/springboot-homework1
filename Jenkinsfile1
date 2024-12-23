@@ -14,14 +14,14 @@ pipeline {
             }
         }
 
-        stage('Build and Test') {
-    steps {
-        echo "Starting SonarQube scan..."
-        sh '''
-            mvn clean verify sonar:sonar
-        '''
-    }
-}
+       stage('Build and Test') {
+            steps {
+                echo "Building the project..."
+                sh './mvnw clean install' // Clean and install (compiling the classes)
+                echo "Running tests..."
+                sh './mvnw test' // Run tests
+            }
+        }
 
         stage('SonarQube Scan') {
             steps {
