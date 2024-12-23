@@ -30,7 +30,7 @@ tools {
         stage('SonarQube Scan') {
             steps {
                 echo "Starting SonarQube scan..."
-                withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'SonarQube'
+                withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'sq1'
                     sh './mvnw sonar:sonar -Dsonar.java.binaries=target/classes' // Scan after build
                 }
             }
