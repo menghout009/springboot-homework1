@@ -41,7 +41,7 @@ pipeline {
                         if (qualityGate.status != 'OK') {
                             error "Pipeline failed due to quality gate failure: ${qualityGate.status}"
                         }
-                        echo "SonarQube analysis results available at: http://34.87.163.238:9000/dashboard?id=Homework1"
+                        echo "SonarQube analysis results available at: http://34.87.163.238:9000/dashboard?id=${key}"
                     }
                 }
             }
